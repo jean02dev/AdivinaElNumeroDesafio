@@ -1,4 +1,4 @@
-enum Level { easy, medium, hard, expert }
+import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
 
 class GameEntity {
   final Level level;
@@ -16,4 +16,22 @@ class GameEntity {
     this.lowerNumbers = const [],
     this.history = const [],
   });
+
+  GameEntity copyWith({
+    Level? level,
+    int? targetNumber,
+    int? attempts,
+    List<int>? higherNumbers,
+    List<int>? lowerNumbers,
+    List<int>? history,
+  }) {
+    return GameEntity(
+      level: level ?? this.level,
+      targetNumber: targetNumber ?? this.targetNumber,
+      attempts: attempts ?? this.attempts,
+      higherNumbers: higherNumbers ?? this.higherNumbers,
+      lowerNumbers: lowerNumbers ?? this.lowerNumbers,
+      history: history ?? this.history,
+    );
+  }
 }
