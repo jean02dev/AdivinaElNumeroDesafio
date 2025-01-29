@@ -1,16 +1,13 @@
 # desafio_adivina_el_numero
 
-A new Flutter project.
+Esta aplicación es un juego basado en el clásico desafío de "adivinar el número",
+pero elevado a nuevos niveles de interactividad y complejidad.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Ejecutar el build runner
 
-A few resources to get you started if this is your first Flutter project:
+```
+dart run build_runner watch
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
