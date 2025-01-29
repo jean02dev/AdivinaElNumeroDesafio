@@ -110,6 +110,18 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "riverpod",
+      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/riverpod-2.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "riverpod_annotation",
+      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/riverpod_annotation-2.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///home/jean/snap/flutter/common/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -126,6 +138,12 @@
       "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/state_notifier-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
@@ -170,7 +188,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-01-29T13:37:08.975202Z",
+  "generated": "2025-01-29T13:57:55.638746Z",
   "generator": "pub",
   "generatorVersion": "3.4.4",
   "flutterRoot": "file:///home/jean/snap/flutter/common/flutter",
