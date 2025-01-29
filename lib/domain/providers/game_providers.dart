@@ -17,6 +17,17 @@ class GameProviders extends _$GameProviders {
         attempts: _attemptsForLevel(level));
   }
 
+  void updateLevel(Level newLevel) {
+    state = state.copyWith(
+      level: newLevel,
+      targetNumber: _generateNumber(newLevel),
+      attempts: _attemptsForLevel(newLevel),
+      higherNumbers: [],
+      lowerNumbers: [],
+      history: [],
+    );
+  }
+
   void guessNumber(int number) {
     if (number == state.targetNumber) {
       state = state.copyWith(history: [...state.higherNumbers, number]);
