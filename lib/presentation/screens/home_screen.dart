@@ -1,5 +1,5 @@
+import 'package:desafio_adivina_el_numero/presentation/screens/game_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentation/screens/game_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,15 +8,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Adivina el numero')),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {},
-          )
-        ],
+        title: Center(child: Text('Adivina el numero')),
+        actions: [Icon(Icons.menu)],
       ),
-      body: const GameScreen(),
+      body: GameScreen(),
     );
   }
 }

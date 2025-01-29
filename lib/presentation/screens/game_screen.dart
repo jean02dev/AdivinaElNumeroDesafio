@@ -5,14 +5,8 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Expanded(
-          child: Center(
-            child: Text('Hola Mundo'),
-          ),
-        )
-      ],
+    return Column(
+      children: [Expanded(child: Center(child: Text('Hola Mundo')))],
     );
   }
 }
