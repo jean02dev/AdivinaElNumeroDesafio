@@ -10,9 +10,9 @@ part 'game_providers.g.dart';
 class GameProviders extends _$GameProviders {
   @override
   GameEntity build() {
-    Level level = Level.easy;
+    Level level = Level.facil;
     return GameEntity(
-        level: Level.easy,
+        level: Level.facil,
         targetNumber: _generateNumber(level),
         attempts: _attemptsForLevel(level),
         history: []);
@@ -56,26 +56,26 @@ class GameProviders extends _$GameProviders {
 
   int _generateNumber(Level level) {
     switch (level) {
-      case Level.easy:
+      case Level.facil:
         return Random().nextInt(10) + 1;
-      case Level.medium:
+      case Level.medio:
         return Random().nextInt(20) + 1;
-      case Level.hard:
+      case Level.avanzado:
         return Random().nextInt(100) + 1;
-      case Level.expert:
+      case Level.extremo:
         return Random().nextInt(1000) + 1;
     }
   }
 
   int _attemptsForLevel(Level level) {
     switch (level) {
-      case Level.easy:
+      case Level.facil:
         return 5;
-      case Level.medium:
+      case Level.medio:
         return 8;
-      case Level.hard:
+      case Level.avanzado:
         return 15;
-      case Level.expert:
+      case Level.extremo:
         return 25;
     }
   }

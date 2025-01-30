@@ -1,1 +1,1 @@
-enum Level { easy, medium, hard, expert }
+enum Level { facil, medio, avanzado, extremo }
