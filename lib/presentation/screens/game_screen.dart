@@ -1,6 +1,6 @@
-import 'package:desafio_adivina_el_numero/domain/entities/game_entity.dart';
-import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
-import 'package:desafio_adivina_el_numero/domain/providers/game_providers.dart';
+import 'package:desafio_adivina_el_numero/entities/game_entity.dart';
+import 'package:desafio_adivina_el_numero/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/providers/game_providers.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/colum_values.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/slide_values.dart'; // Importa el widget correctamente
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class GameScreen extends ConsumerWidget {
                         labelText: 'Adivina un número',
                         border: OutlineInputBorder(),
                       ),
-                      onSubmitted: (value) {
+                      onSubmitted: (String value) {
                         int guessedNumber = int.tryParse(value) ?? 0;
                         ref
                             .read(gameProvidersProvider.notifier)
@@ -87,7 +87,7 @@ class GameScreen extends ConsumerWidget {
               min: 0,
               max: levels.length - 1.toDouble(),
               divisions: levels.length - 1,
-              label: currentLevel.toString().split('.').last,
+              label: currentLevel.name,
               onChange: (value) {
                 final newLevel = levels[value.toInt()];
                 ref.read(gameProvidersProvider.notifier).updateLevel(newLevel);

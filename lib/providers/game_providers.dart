@@ -1,7 +1,7 @@
-import 'dart:math';
-
-import 'package:desafio_adivina_el_numero/domain/entities/game_entity.dart';
-import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/entities/game_entity.dart';
+import 'package:desafio_adivina_el_numero/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/helpers/attempts_for_level.dart';
+import 'package:desafio_adivina_el_numero/helpers/generate_number.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'game_providers.g.dart';
@@ -14,8 +14,8 @@ class GameProviders extends _$GameProviders {
 
     return GameEntity(
       level: level,
-      targetNumber: _generateNumber(level),
-      attempts: _attemptsForLevel(level),
+      targetNumber: generateNumber(level),
+      attempts: attemptsForLevel(level),
       history: [],
     );
   }
@@ -23,8 +23,8 @@ class GameProviders extends _$GameProviders {
   void updateLevel(Level newLevel) {
     state = state.copyWith(
       level: newLevel,
-      targetNumber: _generateNumber(newLevel),
-      attempts: _attemptsForLevel(newLevel),
+      targetNumber: generateNumber(newLevel),
+      attempts: attemptsForLevel(newLevel),
       higherNumbers: [],
       lowerNumbers: [],
       history: state.history,
@@ -35,10 +35,10 @@ class GameProviders extends _$GameProviders {
   void guessNumber(int number) {
     int remainingAttempts = state.attempts - 1;
     Level currentLevel = state.level;
-    bool gameWon = false;
+    bool isCorrectNumber = false;
 
     if (number == state.targetNumber) {
-      gameWon = true;
+      isCorrectNumber = true;
     } else if (number > state.targetNumber) {
       state = state.copyWith(
         higherNumbers: [...state.higherNumbers, number],
@@ -51,50 +51,24 @@ class GameProviders extends _$GameProviders {
       );
     }
 
-    if (remainingAttempts <= 0 || gameWon) {
+    if (remainingAttempts <= 0 || isCorrectNumber) {
       state = state.copyWith(
         history: [
           ...state.history,
-          {'number': state.targetNumber, 'isCorrect': gameWon},
+          {'number': state.targetNumber, 'isCorrect': isCorrectNumber},
         ],
-        targetNumber: _generateNumber(currentLevel),
-        attempts: _attemptsForLevel(currentLevel),
+        targetNumber: generateNumber(currentLevel),
+        attempts: attemptsForLevel(currentLevel),
         higherNumbers: [],
         lowerNumbers: [],
-        isGameWon: gameWon,
+        isGameWon: isCorrectNumber,
       );
     } else {
       state = state.copyWith(
         attempts: remainingAttempts,
         history: state.history,
-        isGameWon: gameWon,
+        isGameWon: isCorrectNumber,
       );
-    }
-  }
-
-  int _generateNumber(Level level) {
-    switch (level) {
-      case Level.facil:
-        return Random().nextInt(10) + 1;
-      case Level.medio:
-        return Random().nextInt(20) + 1;
-      case Level.avanzado:
-        return Random().nextInt(100) + 1;
-      case Level.extremo:
-        return Random().nextInt(1000) + 1;
-    }
-  }
-
-  int _attemptsForLevel(Level level) {
-    switch (level) {
-      case Level.facil:
-        return 5;
-      case Level.medio:
-        return 8;
-      case Level.avanzado:
-        return 15;
-      case Level.extremo:
-        return 25;
     }
   }
 }
