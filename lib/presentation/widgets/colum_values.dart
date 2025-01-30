@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 class ColumValues extends StatefulWidget {
   final String headerText;
-  final List<int> bodyText;
+  final List<dynamic> bodyText;
   final bool? isHistory;
-  final bool? isGameWon;
 
   const ColumValues({
     super.key,
     required this.headerText,
     required this.bodyText,
     this.isHistory,
-    this.isGameWon,
   });
 
   @override
@@ -42,18 +40,24 @@ class _ColumValuesState extends State<ColumValues> {
                     ? ListView.builder(
                         itemCount: widget.bodyText.length,
                         itemBuilder: (context, index) {
+                          dynamic item = widget.bodyText[index];
+                          bool isCorrect = widget.isHistory == true &&
+                                  item is Map<String, dynamic>
+                              ? item['isCorrect']
+                              : false;
+                          int number = item is Map<String, dynamic>
+                              ? item['number']
+                              : item;
                           return Container(
                             padding: EdgeInsets.symmetric(vertical: 2),
                             child: Text(
-                              widget.bodyText[index].toString(),
+                              number.toString(),
                               textAlign: TextAlign.center,
-                              style: widget.isHistory == true
-                                  ? TextStyle(
-                                      color: widget.isHistory == true &&
-                                              widget.isGameWon == true
-                                          ? Colors.green
-                                          : Colors.red)
-                                  : TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: widget.isHistory == true
+                                    ? (isCorrect ? Colors.green : Colors.red)
+                                    : Colors.black,
+                              ),
                             ),
                           );
                         },

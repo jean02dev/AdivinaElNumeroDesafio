@@ -6,7 +6,7 @@ class GameEntity {
   final int attempts;
   final List<int> higherNumbers;
   final List<int> lowerNumbers;
-  final List<int> history;
+  final List<Map<String, dynamic>> history;
   final bool isGameWon;
 
   GameEntity({
@@ -25,7 +25,7 @@ class GameEntity {
     int? attempts,
     List<int>? higherNumbers,
     List<int>? lowerNumbers,
-    List<int>? history,
+    required List<Map<String, dynamic>> history,
     bool? isGameWon,
   }) {
     return GameEntity(
@@ -34,7 +34,7 @@ class GameEntity {
       attempts: attempts ?? this.attempts,
       higherNumbers: higherNumbers ?? this.higherNumbers,
       lowerNumbers: lowerNumbers ?? this.lowerNumbers,
-      history: history ?? this.history,
+      history: history,
       isGameWon: isGameWon ?? this.isGameWon,
     );
   }

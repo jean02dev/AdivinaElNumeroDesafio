@@ -13,7 +13,7 @@ class GameProviders extends _$GameProviders {
     Level level = Level.facil;
 
     return GameEntity(
-      level: Level.facil,
+      level: level,
       targetNumber: _generateNumber(level),
       attempts: _attemptsForLevel(level),
       history: [],
@@ -27,6 +27,7 @@ class GameProviders extends _$GameProviders {
       attempts: _attemptsForLevel(newLevel),
       higherNumbers: [],
       lowerNumbers: [],
+      history: state.history,
       isGameWon: false,
     );
   }
@@ -39,14 +40,23 @@ class GameProviders extends _$GameProviders {
     if (number == state.targetNumber) {
       gameWon = true;
     } else if (number > state.targetNumber) {
-      state = state.copyWith(higherNumbers: [...state.higherNumbers, number]);
+      state = state.copyWith(
+        higherNumbers: [...state.higherNumbers, number],
+        history: state.history,
+      );
     } else if (number < state.targetNumber) {
-      state = state.copyWith(lowerNumbers: [...state.lowerNumbers, number]);
+      state = state.copyWith(
+        lowerNumbers: [...state.lowerNumbers, number],
+        history: state.history,
+      );
     }
 
     if (remainingAttempts <= 0 || gameWon) {
       state = state.copyWith(
-        history: [...state.history, state.targetNumber],
+        history: [
+          ...state.history,
+          {'number': state.targetNumber, 'isCorrect': gameWon},
+        ],
         targetNumber: _generateNumber(currentLevel),
         attempts: _attemptsForLevel(currentLevel),
         higherNumbers: [],
@@ -54,7 +64,11 @@ class GameProviders extends _$GameProviders {
         isGameWon: gameWon,
       );
     } else {
-      state = state.copyWith(attempts: remainingAttempts, isGameWon: gameWon);
+      state = state.copyWith(
+        attempts: remainingAttempts,
+        history: state.history,
+        isGameWon: gameWon,
+      );
     }
   }
 

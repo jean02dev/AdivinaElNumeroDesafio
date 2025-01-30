@@ -2,7 +2,6 @@ import 'package:desafio_adivina_el_numero/domain/entities/game_entity.dart';
 import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
 import 'package:desafio_adivina_el_numero/domain/providers/game_providers.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/colum_values.dart';
-import 'package:desafio_adivina_el_numero/presentation/widgets/input_guess_number.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/slide_values.dart'; // Importa el widget correctamente
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,16 +25,26 @@ class GameScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InputGuessNumber(
-                    numberController: numberController,
-                    labelText: 'Adivina un número',
-                    onSubmitted: (value) {
-                      int guessedNumber = int.tryParse(value) ?? 0;
-                      ref
-                          .read(gameProvidersProvider.notifier)
-                          .guessNumber(guessedNumber);
-                    }),
-                SizedBox(width: 30),
+                Center(
+                  child: SizedBox(
+                    width: 200,
+                    child: TextField(
+                      controller: numberController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Adivina un número',
+                        border: OutlineInputBorder(),
+                      ),
+                      onSubmitted: (value) {
+                        int guessedNumber = int.tryParse(value) ?? 0;
+                        ref
+                            .read(gameProvidersProvider.notifier)
+                            .guessNumber(guessedNumber);
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16),
                 Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -49,36 +58,41 @@ class GameScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 40),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ColumValues(
-                    headerText: 'Mayor que',
-                    bodyText: gameProvider.lowerNumbers),
+                  headerText: 'Mayor que',
+                  bodyText: gameProvider.lowerNumbers
+                      .map((number) => {'number': number, 'isCorrect': false})
+                      .toList(),
+                ),
                 ColumValues(
-                    headerText: 'Menor que',
-                    bodyText: gameProvider.higherNumbers),
+                  headerText: 'Menor que',
+                  bodyText: gameProvider.higherNumbers
+                      .map((number) => {'number': number, 'isCorrect': false})
+                      .toList(),
+                ),
                 ColumValues(
                   headerText: 'Historial',
                   bodyText: gameProvider.history,
                   isHistory: true,
-                  isGameWon: gameProvider.isGameWon,
-                )
+                ),
               ],
             ),
             SizedBox(height: 30),
             Text('Nivel ${currentLevel.name}', textAlign: TextAlign.center),
             SizedBox(height: 10),
             SlideValues(
-                value: levels.indexOf(currentLevel).toDouble(),
-                min: 0,
-                max: levels.length - 1.toDouble(),
-                divisions: levels.length - 1,
-                label: currentLevel.name,
-                onChange: (value) {
-                  final newLevel = levels[value.toInt()];
-                  ref
-                      .read(gameProvidersProvider.notifier)
-                      .updateLevel(newLevel);
-                }),
+              value: levels.indexOf(currentLevel).toDouble(),
+              min: 0,
+              max: levels.length - 1.toDouble(),
+              divisions: levels.length - 1,
+              label: currentLevel.toString().split('.').last,
+              onChange: (value) {
+                final newLevel = levels[value.toInt()];
+                ref.read(gameProvidersProvider.notifier).updateLevel(newLevel);
+              },
+            ),
           ],
         ),
       ),
