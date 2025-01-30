@@ -153,13 +153,13 @@
     },
     {
       "name": "custom_lint",
-      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/custom_lint-0.7.1",
+      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/custom_lint-0.7.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "custom_lint_builder",
-      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/custom_lint_builder-0.7.1",
+      "rootUri": "file:///home/jean/.pub-cache/hosted/pub.dev/custom_lint_builder-0.7.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -578,7 +578,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-01-29T17:58:49.745351Z",
+  "generated": "2025-01-30T00:04:56.951646Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///home/jean/snap/flutter/common/flutter",

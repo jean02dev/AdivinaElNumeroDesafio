@@ -14,7 +14,8 @@ class GameProviders extends _$GameProviders {
     return GameEntity(
         level: Level.easy,
         targetNumber: _generateNumber(level),
-        attempts: _attemptsForLevel(level));
+        attempts: _attemptsForLevel(level),
+        history: []);
   }
 
   void updateLevel(Level newLevel) {
@@ -24,26 +25,29 @@ class GameProviders extends _$GameProviders {
       attempts: _attemptsForLevel(newLevel),
       higherNumbers: [],
       lowerNumbers: [],
-      history: [],
     );
   }
 
   void guessNumber(int number) {
     int remainingAttempts = state.attempts - 1;
     Level currentLevel = state.level;
+    bool gameWon = false;
+
     if (number == state.targetNumber) {
-      state = state.copyWith(history: [...state.higherNumbers, number]);
+      gameWon = true;
     } else if (number > state.targetNumber) {
       state = state.copyWith(higherNumbers: [...state.higherNumbers, number]);
     } else if (number < state.targetNumber) {
       state = state.copyWith(lowerNumbers: [...state.lowerNumbers, number]);
     }
-    if (remainingAttempts <= 0) {
+
+    if (remainingAttempts <= 0 || gameWon) {
       state = state.copyWith(
+        history: [...state.history, state.targetNumber],
         targetNumber: _generateNumber(currentLevel),
         attempts: _attemptsForLevel(currentLevel),
-        higherNumbers: [],
-        lowerNumbers: [],
+        higherNumbers: [...state.higherNumbers],
+        lowerNumbers: [...state.lowerNumbers],
       );
     } else {
       state = state.copyWith(attempts: remainingAttempts);
