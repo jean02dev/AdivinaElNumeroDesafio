@@ -4,12 +4,14 @@ class ColumValues extends StatefulWidget {
   final String headerText;
   final List<dynamic> bodyText;
   final bool? isHistory;
+  final bool isDarkMode;
 
   const ColumValues({
     super.key,
     required this.headerText,
     required this.bodyText,
     this.isHistory,
+    required this.isDarkMode,
   });
 
   @override
@@ -25,7 +27,9 @@ class _ColumValuesState extends State<ColumValues> {
         child: Container(
           height: MediaQuery.of(context).size.height * 0.4,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1),
+            border: Border.all(
+                color: widget.isDarkMode ? Colors.white : Colors.black,
+                width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
@@ -54,10 +58,11 @@ class _ColumValuesState extends State<ColumValues> {
                               number.toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: widget.isHistory == true
-                                    ? (isCorrect ? Colors.green : Colors.red)
-                                    : Colors.black,
-                              ),
+                                  color: widget.isHistory == true
+                                      ? (isCorrect ? Colors.green : Colors.red)
+                                      : (widget.isDarkMode
+                                          ? Colors.white
+                                          : Colors.black)),
                             ),
                           );
                         },

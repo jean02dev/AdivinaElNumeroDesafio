@@ -1,7 +1,7 @@
-import 'package:desafio_adivina_el_numero/entities/game_entity.dart';
-import 'package:desafio_adivina_el_numero/entities/levels_enum.dart';
-import 'package:desafio_adivina_el_numero/helpers/attempts_for_level.dart';
-import 'package:desafio_adivina_el_numero/helpers/generate_number.dart';
+import 'package:desafio_adivina_el_numero/domain/entities/game_entity.dart';
+import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/config/helpers/attempts_for_level.dart';
+import 'package:desafio_adivina_el_numero/config/helpers/generate_number.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'game_providers.g.dart';

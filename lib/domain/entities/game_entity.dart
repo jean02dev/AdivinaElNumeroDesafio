@@ -1,4 +1,4 @@
-import 'package:desafio_adivina_el_numero/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
 
 class GameEntity {
   final Level level;

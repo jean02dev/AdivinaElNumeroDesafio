@@ -1,6 +1,7 @@
-import 'package:desafio_adivina_el_numero/entities/game_entity.dart';
-import 'package:desafio_adivina_el_numero/entities/levels_enum.dart';
-import 'package:desafio_adivina_el_numero/providers/game_providers.dart';
+import 'package:desafio_adivina_el_numero/domain/entities/game_entity.dart';
+import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
+import 'package:desafio_adivina_el_numero/presentation/providers/dark_mode_provider.dart';
+import 'package:desafio_adivina_el_numero/presentation/providers/game_providers.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/colum_values.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/slide_values.dart'; // Importa el widget correctamente
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class GameScreen extends ConsumerWidget {
     final GameEntity gameProvider = ref.watch(gameProvidersProvider);
     final Level currentLevel = ref.watch(gameProvidersProvider).level;
     final List<Level> levels = Level.values;
+    TextEditingController();
+    final bool isDarkMode = ref.watch(darkModeProviderProvider);
     final TextEditingController numberController = TextEditingController();
 
     return Padding(
@@ -62,18 +65,21 @@ class GameScreen extends ConsumerWidget {
               children: [
                 ColumValues(
                   headerText: 'Mayor que',
+                  isDarkMode: isDarkMode,
                   bodyText: gameProvider.lowerNumbers
                       .map((number) => {'number': number, 'isCorrect': false})
                       .toList(),
                 ),
                 ColumValues(
                   headerText: 'Menor que',
+                  isDarkMode: isDarkMode,
                   bodyText: gameProvider.higherNumbers
                       .map((number) => {'number': number, 'isCorrect': false})
                       .toList(),
                 ),
                 ColumValues(
                   headerText: 'Historial',
+                  isDarkMode: isDarkMode,
                   bodyText: gameProvider.history,
                   isHistory: true,
                 ),
