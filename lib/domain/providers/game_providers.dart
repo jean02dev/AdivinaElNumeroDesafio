@@ -11,11 +11,13 @@ class GameProviders extends _$GameProviders {
   @override
   GameEntity build() {
     Level level = Level.facil;
+
     return GameEntity(
-        level: Level.facil,
-        targetNumber: _generateNumber(level),
-        attempts: _attemptsForLevel(level),
-        history: []);
+      level: Level.facil,
+      targetNumber: _generateNumber(level),
+      attempts: _attemptsForLevel(level),
+      history: [],
+    );
   }
 
   void updateLevel(Level newLevel) {
@@ -25,6 +27,7 @@ class GameProviders extends _$GameProviders {
       attempts: _attemptsForLevel(newLevel),
       higherNumbers: [],
       lowerNumbers: [],
+      isGameWon: false,
     );
   }
 
@@ -46,11 +49,12 @@ class GameProviders extends _$GameProviders {
         history: [...state.history, state.targetNumber],
         targetNumber: _generateNumber(currentLevel),
         attempts: _attemptsForLevel(currentLevel),
-        higherNumbers: [...state.higherNumbers],
-        lowerNumbers: [...state.lowerNumbers],
+        higherNumbers: [],
+        lowerNumbers: [],
+        isGameWon: gameWon,
       );
     } else {
-      state = state.copyWith(attempts: remainingAttempts);
+      state = state.copyWith(attempts: remainingAttempts, isGameWon: gameWon);
     }
   }
 

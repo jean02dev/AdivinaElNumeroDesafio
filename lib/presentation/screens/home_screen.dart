@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Adivina el numero')),
+        title: Center(child: Text('Adivina un número')),
         actions: [Icon(Icons.menu)],
       ),
       body: GameScreen(),

@@ -7,6 +7,7 @@ class GameEntity {
   final List<int> higherNumbers;
   final List<int> lowerNumbers;
   final List<int> history;
+  final bool isGameWon;
 
   GameEntity({
     required this.level,
@@ -15,6 +16,7 @@ class GameEntity {
     this.higherNumbers = const [],
     this.lowerNumbers = const [],
     this.history = const [],
+    this.isGameWon = false,
   });
 
   GameEntity copyWith({
@@ -24,6 +26,7 @@ class GameEntity {
     List<int>? higherNumbers,
     List<int>? lowerNumbers,
     List<int>? history,
+    bool? isGameWon,
   }) {
     return GameEntity(
       level: level ?? this.level,
@@ -32,6 +35,7 @@ class GameEntity {
       higherNumbers: higherNumbers ?? this.higherNumbers,
       lowerNumbers: lowerNumbers ?? this.lowerNumbers,
       history: history ?? this.history,
+      isGameWon: isGameWon ?? this.isGameWon,
     );
   }
 }
