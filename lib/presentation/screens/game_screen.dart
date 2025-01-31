@@ -3,6 +3,7 @@ import 'package:desafio_adivina_el_numero/domain/entities/levels_enum.dart';
 import 'package:desafio_adivina_el_numero/presentation/providers/dark_mode_provider.dart';
 import 'package:desafio_adivina_el_numero/presentation/providers/game_providers.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/colum_values.dart';
+import 'package:desafio_adivina_el_numero/presentation/widgets/input_guess_number.dart';
 import 'package:desafio_adivina_el_numero/presentation/widgets/slide_values.dart'; // Importa el widget correctamente
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,22 +31,18 @@ class GameScreen extends ConsumerWidget {
               children: [
                 Center(
                   child: SizedBox(
-                    width: 200,
-                    child: TextField(
-                      controller: numberController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      width: 200,
+                      child: InputGuessNumber(
+                        numberController: numberController,
                         labelText: 'Adivina un número',
-                        border: OutlineInputBorder(),
-                      ),
-                      onSubmitted: (String value) {
-                        int guessedNumber = int.tryParse(value) ?? 0;
-                        ref
-                            .read(gameProvidersProvider.notifier)
-                            .guessNumber(guessedNumber);
-                      },
-                    ),
-                  ),
+                        level: currentLevel,
+                        onSubmitted: (value) {
+                          int guessedNumber = int.tryParse(value) ?? 0;
+                          ref
+                              .read(gameProvidersProvider.notifier)
+                              .guessNumber(guessedNumber);
+                        },
+                      )),
                 ),
                 SizedBox(width: 16),
                 Center(
